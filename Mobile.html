@@ -14,22 +14,22 @@
         this.sentMessage = [];
         this.isOn = false;
 
-        this.powerBtn = function (isOn) {
-            this.isOn = !isOn;
+        this.powerBtn = function () {
+            this.isOn = !this.isOn;
         };
 
         this.recharge = function () {
-            this.battery = 100;
+            this.battery++;
         }
 
         this.writeMessage = function (message) {
             this.draftMessage.push(message);
-            battery--;
+            this.battery--;
         }
 
         this.receiveMessage = function (message) {
             this.inboxMessage.push(message);
-            battery--;
+            this.battery--;
         }
 
         this.sendMessage = function (other) {
@@ -41,27 +41,19 @@
         }
 
         this.showInboxMassage = function () {
-            battery--;
+            this.battery--;
             if(this.inboxMessage.length===0){
                 return "Empty!";
             }
-            let rs="";
-            for(let i=0;i<this.inboxMessage.length;i++){
-                rs+=this.inboxMessage[i]+"<br>";
-            }
-            return rs;
+            return this.inboxMessage;
         }
 
         this.showSentMessage = function () {
-            battery--;
+            this.battery--;
             if(this.sentMessage.length===0){
                 return "Empty!";
             }
-            let rs="";
-            for(let i=0;i<this.sentMessage.length;i++){
-                rs+=this.sentMessage[i]+"<br>";
-            }
-            return rs;
+            return this.sentMessage;
         }
     }
 
@@ -83,7 +75,7 @@
     let message = prompt("Enter message:");
     nokia.writeMessage(message);
     nokia.sendMessage(iPhone);
-    document.write(iPhone.showInboxMassage());
+    document.write(iPhone.showInboxMassage().toString());
 </script>
 </body>
 </html>
